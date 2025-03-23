@@ -1,0 +1,12 @@
+<div *ngIf="isLoading" class="loading">Carregando tarefas...</div>
+
+<div *ngIf="!isLoading && tasks.length === 0" class="no-tasks">
+  Nenhuma tarefa criada ainda.
+</div>
+
+<ul *ngIf="!isLoading && tasks.length > 0" class="task-list">
+  <li *ngFor="let task of tasks">
+    <input type="checkbox" id="{{ task.id }}">
+    <label for="{{ task.id }}">{{ task.title }}</label>
+  </li>
+</ul>
