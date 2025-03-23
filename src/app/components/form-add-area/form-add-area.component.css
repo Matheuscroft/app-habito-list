@@ -1,0 +1,78 @@
+.form-add-area__container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 500px;
+    padding: 10px;
+    background-color: #252525;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.05);
+  }
+  
+  .form-add-area__name {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-add-area__color {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+  }
+  
+  .form-add-area__color input {
+    width: 40px;
+    height: 38px; 
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    appearance: none;
+    background: none;
+  }
+  
+  input[type="text"] {
+    width: 100%;
+    padding: 6px;
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 5px;
+    font-size: 14px;
+    height: 38px;
+  }
+  
+  button {
+    padding: 6px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  @media (max-width: 500px) {
+    .form-add-area__container {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .form-add-area__color {
+      width: 100%;
+      align-items: flex-start;
+    }
+  }
+  

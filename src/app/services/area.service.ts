@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, map } from 'rxjs';
+import { throwError } from 'rxjs';
 
 export interface Area {
   id: string;
@@ -15,10 +16,28 @@ export interface Area {
 export class AreaService {
 
   private apiUrl = 'http://localhost:8080/areas';
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
 
   constructor(private http: HttpClient) { }
 
   getAreas(): Observable<Area[]> {
-    return this.http.get<Area[]>(this.apiUrl);
+    return this.http.get<Area[]>(this.apiUrl, this.httpOptions)
+      .pipe(
+        map(response => response),
+        catchError(this.handleError)
+      );
+  }
+
+  addArea(area: Area): Observable<Area> {
+    return this.http.post<Area>(this.apiUrl, area);
+  }
+
+  private handleError(error: any) {
+    console.error('An error occurred:', error);
+    return throwError(() => error);
   }
 }

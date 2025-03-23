@@ -1,0 +1,14 @@
+<div class="form-add-area__container">
+    <div class="form-add-area__name">
+      <label for="areaName">Nome da Área</label>
+      <input id="areaName" type="text" placeholder="Nome da Área" [(ngModel)]="newArea.name" (keydown)="handleEnter($event)" />
+    </div>
+  
+    <div class="form-add-area__color">
+      <label for="areaColor">Cor</label>
+      <input id="areaColor" type="color" [(ngModel)]="newArea.color" />
+    </div>
+  
+    <button (click)="addArea()">Criar Área</button>
+  </div>
+  

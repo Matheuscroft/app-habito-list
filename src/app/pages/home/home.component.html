@@ -4,6 +4,8 @@
 
   <div class="home__areas">
     <h2>Áreas</h2>
+
+    <app-form-add-area [areas]="areas" (areaAdded)="onAreaAdded($event)"></app-form-add-area>
     
     <ul>
         <li *ngFor="let area of areas">
