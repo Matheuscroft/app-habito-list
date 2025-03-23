@@ -5,13 +5,17 @@
   <div class="home__areas">
     <h2>Áreas</h2>
     
-    <p>Em breve, lista de áreas...</p>
+    <ul>
+        <li *ngFor="let area of areas">
+          {{ area.name }}
+        </li>
+      </ul>
   </div>
 
  
   <div class="home__tasks">
     <h2>Minhas Tarefas</h2>
-    <app-form-add-item></app-form-add-item>
+    <app-form-add-item [areas]="areas"></app-form-add-item>
     <app-task-list></app-task-list>
   </div>
 </div>

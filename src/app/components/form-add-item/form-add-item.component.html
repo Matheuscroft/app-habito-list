@@ -4,23 +4,23 @@
     <input type="text" id="title" [(ngModel)]="title" name="title" required>
   </div>
 
+  <div class="form-add-item__score">
+    <label for="score">Pontuação</label>
+    <input type="number" id="score" [(ngModel)]="score" name="score" required min="1">
+  </div>
+  
   <div class="form-add-item__areaName">
     <label for="areaId">Área</label>
     <select id="areaId" [(ngModel)]="areaId" name="areaId" required>
-      <option *ngFor="let area of areas" [value]="area.id">{{ area.nome }}</option>
+      <option *ngFor="let area of areas" [value]="area.id">{{ area.name }}</option>
     </select>
   </div>
 
   <div class="form-add-item__subAreaName">
     <label for="subareaId">Subárea</label>
     <select id="subareaId" [(ngModel)]="subareaId" name="subareaId" required>
-      <option *ngFor="let subarea of subareas" [value]="subarea.id">{{ subarea.nome }}</option>
+      <option *ngFor="let subarea of subareas" [value]="subarea.id">{{ subarea.name }}</option>
     </select>
-  </div>
-
-  <div class="form-add-item__score">
-    <label for="score">Pontuação</label>
-    <input type="number" id="score" [(ngModel)]="score" name="score" required min="1">
   </div>
 
   <button type="submit">Adicionar Item</button>
