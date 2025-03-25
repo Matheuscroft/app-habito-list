@@ -1,0 +1,38 @@
+.areas-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .loading {
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    color: #fff;
+  }
+  
+  .area-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(50% - 10px);
+    height: 100px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-size: 16px;
+  }
+
+  .area-card:hover{
+    cursor: pointer;
+  }
+
+  .area-card span {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 
+                 -2px -2px 4px rgba(0, 0, 0, 0.8), 
+                 2px -2px 4px rgba(0, 0, 0, 0.8), 
+                 -2px 2px 4px rgba(0, 0, 0, 0.8);
+  }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { TaskService } from '../../services/task.service';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-task-list',
@@ -14,7 +14,7 @@ export class TaskListComponent {
   tasks: any[] = [];
   isLoading = true;
 
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService, private router: Router) {}
 
   ngOnInit() {
     this.taskService.getTasks().subscribe({
@@ -26,6 +26,10 @@ export class TaskListComponent {
         this.isLoading = false;
       }
     });
+  }
+
+  navigateToTaskDetail(taskId: string): void {
+    this.router.navigate(['/task', taskId]);
   }
 
 }

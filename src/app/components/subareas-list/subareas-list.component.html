@@ -1,0 +1,11 @@
+<div class="subareas-list-container">
+    <div *ngIf="isLoading" class="loading">Carregando subáreas...</div>
+    <div *ngIf="!isLoading && subareas.length === 0" class="no-subareas">
+      Nenhuma subárea criada ainda.
+    </div>
+    <div *ngIf="!isLoading && subareas.length > 0" class="subareas-list">
+      <div class="subarea-card" *ngFor="let subarea of subareas">
+        <span>{{ subarea.name }}</span>
+      </div>
+    </div>
+  </div>

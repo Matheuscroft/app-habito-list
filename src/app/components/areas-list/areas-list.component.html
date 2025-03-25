@@ -1,0 +1,8 @@
+<div class="areas-list-container">
+  <div *ngIf="isLoading" class="loading">Carregando áreas...</div>
+  <div *ngIf="!isLoading" class="areas-list">
+    <div class="area-card" *ngFor="let area of areas" [style.background-color]="area.color" (click)="navigateToAreaDetail(area.id)">
+      <span>{{ area.name }}</span>
+    </div>
+  </div>
+</div>

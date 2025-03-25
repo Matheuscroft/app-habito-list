@@ -3,20 +3,22 @@
 <div class="container__home">
 
   <div class="home__areas">
-    <h2>Áreas</h2>
+
+    <div class="areas-list-title">
+      <h2>Áreas</h2>
+    </div>
 
     <app-form-add-area [areas]="areas" (areaAdded)="onAreaAdded($event)"></app-form-add-area>
     
-    <ul>
-        <li *ngFor="let area of areas">
-          {{ area.name }}
-        </li>
-      </ul>
+    <app-areas-list [areas]="areas"></app-areas-list>
+    
   </div>
 
  
   <div class="home__tasks">
-    <h2>Minhas Tarefas</h2>
+    <div class="task-list-title">
+      <h2>Minhas Tarefas</h2>
+    </div>
     <app-form-add-item [areas]="areas"></app-form-add-item>
     <app-task-list></app-task-list>
   </div>

@@ -7,7 +7,7 @@
 <ul *ngIf="!isLoading && tasks.length > 0" class="task-list">
   <li *ngFor="let task of tasks">
     <input type="checkbox" id="{{ task.id }}">
-    <a [routerLink]="['/task', task.id]" class="task-link">
+    <a (click)="navigateToTaskDetail(task.id)" class="task-link">
         <label for="{{ task.id }}">{{ task.title }}</label>
       </a>
   </li>
