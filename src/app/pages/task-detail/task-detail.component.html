@@ -1,1 +1,39 @@
-<p>task-detail works!</p>
+<div class="task-detail" *ngIf="task">
+  <div class="button-container">
+    <button (click)="goBack()">Voltar</button>
+  </div>
+  <div class="task-header">
+    <div class="task-title">
+      <h1 (click)="toggleEdit('title')">
+        <span *ngIf="!isEditing['title']">{{ task.title }}</span>
+        <input *ngIf="isEditing['title']" [(ngModel)]="task.title" (blur)="updateTask('title', task.title)" (keyup.enter)="updateTask('title', task.title)">
+      </h1>
+    </div>
+    <div class="task-score">
+      <span> + {{ task.score }} XP</span>
+    </div>
+  </div>
+  <div class="task-area">
+    <div class="area-info">
+      <div class="area-name">
+        <p>
+          Área: 
+          <span *ngIf="!isEditing['areaId']">{{ area?.name }}</span>
+          <select *ngIf="isEditing['areaId']" [(ngModel)]="task.areaId" (change)="updateTask('areaId', task.areaId)">
+            <option *ngFor="let area of areas" [value]="area">{{ area }}</option>
+          </select>
+        </p>
+      </div>
+      <div class="subarea-name" *ngIf="task.subareaId">
+        <p>
+          Subárea: 
+          <span *ngIf="!isEditing['subareaId']">{{ task.subareaId }}</span>
+          <select *ngIf="isEditing['subareaId']" [(ngModel)]="task.subareaId" (change)="updateTask('subareaId', task.subareaId)">
+            <option *ngFor="let subarea of subareas" [value]="subarea">{{ subarea }}</option>
+          </select>
+        </p>
+      </div>
+    </div>
+    <div class="area-circle" [style.background-color]="getAreaColor()"></div>
+  </div>
+</div>

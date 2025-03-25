@@ -1,0 +1,78 @@
+.task-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #252525;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.05);
+  }
+  
+  .button-container {
+    margin-bottom: 20px;
+  }
+  
+  button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .task-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .task-title {
+    flex: 1;
+  }
+  
+  .task-score {
+    font-size: 18px;
+    color: #ffffff;
+  }
+  
+  .task-area {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  
+  .area-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .area-name, .subarea-name {
+    margin-bottom: 10px;
+  }
+  
+  p {
+    font-size: 18px;
+  }
+  
+  input, select {
+    padding: 8px;
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+  }
+  
+  .area-circle {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+  }

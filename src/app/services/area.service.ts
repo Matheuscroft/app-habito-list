@@ -32,6 +32,14 @@ export class AreaService {
       );
   }
 
+  getAreaById(id: string): Observable<Area> {
+    return this.http.get<Area>(`${this.apiUrl}/${id}`, this.httpOptions)
+      .pipe(
+        map(response => response),
+        catchError(this.handleError)
+      );
+  }
+
   addArea(area: Area): Observable<Area> {
     return this.http.post<Area>(this.apiUrl, area);
   }
