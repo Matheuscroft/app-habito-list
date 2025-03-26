@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -21,7 +21,12 @@ export class SubareaService {
     return this.http.get<Subarea[]>(`${this.apiUrl}/area/${areaId}`);
   }
 
-  deleteSubarea(subareaId: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${subareaId}`);
+  deleteSubarea(subareaId: string): Observable<HttpResponse<any>> {
+    return this.http.delete(`${this.apiUrl}/${subareaId}`, { observe: 'response', responseType: 'text' });
   }
+
+  createSubarea(subarea: Omit<Subarea, 'id'>): Observable<Subarea> {
+    return this.http.post<Subarea>(this.apiUrl, subarea);
+  }
+
 }

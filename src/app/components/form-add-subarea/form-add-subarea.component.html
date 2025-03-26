@@ -1,4 +1,4 @@
 <div class="form-add-subarea">
-    <input [(ngModel)]="subareaName" placeholder="Nome da Subárea">
+    <input [(ngModel)]="subareaName" placeholder="Nome da Subárea" (keydown.enter)="addSubarea()">
     <button (click)="addSubarea()">Adicionar Subárea</button>
   </div>

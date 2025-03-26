@@ -7,13 +7,14 @@
   </div>
 
   <div class="form-container">
-    <app-form-add-subarea [areaId]="area.id"></app-form-add-subarea>
+    <app-form-add-subarea [areaId]="area.id" (subareaAdded)="handleSubareaAdded($event)"></app-form-add-subarea>
   </div>
 
   <div class="subareas-container">
     <app-subareas-list
       [subareas]="subareas"
       [isLoading]="isLoading"
+      (subareaDeleted)="handleSubareaDeleted($event)"
     ></app-subareas-list>
   </div>
 </div>

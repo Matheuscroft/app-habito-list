@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { AreaService } from '../../services/area.service';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Subarea, SubareaService } from '../../services/subarea.service';
 
 @Component({
   selector: 'app-form-add-subarea',
@@ -12,15 +12,25 @@ export class FormAddSubareaComponent {
 
   @Input() areaId: string = '';
   subareaName: string = '';
+  @Output() subareaAdded = new EventEmitter<Subarea>();
 
-  constructor(private areaService: AreaService) {}
+  constructor(private subareaService: SubareaService) {}
 
   addSubarea(): void {
     if (this.subareaName.trim()) {
-      // Adicione a lógica para adicionar a subárea aqui
-      console.log(`Adicionando subárea: ${this.subareaName} à área: ${this.areaId}`);
-      this.subareaName = '';
+      const newSubarea: Omit<Subarea, 'id'> = { name: this.subareaName, areaId: this.areaId };
+      this.subareaService.createSubarea(newSubarea).subscribe({
+        next: (subarea) => {
+          console.log(`Subárea adicionada: ${subarea.name}`);
+          this.subareaName = '';
+          this.subareaAdded.emit(subarea);
+        },
+        error: (error) => {
+          console.error('Erro ao adicionar subárea:', error);
+        }
+      });
     }
   }
+  
 
 }

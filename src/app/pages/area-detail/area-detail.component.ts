@@ -55,6 +55,10 @@ export class AreaDetailComponent {
     this.subareas = this.subareas.filter(subarea => subarea.id !== subareaId);
   }
 
+  handleSubareaAdded(subarea: Subarea): void {
+    this.subareas.push(subarea);
+  }
+
   goBack(): void {
     this.router.navigate(['/']);
   }
