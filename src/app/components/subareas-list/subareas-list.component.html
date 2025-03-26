@@ -6,6 +6,7 @@
     <div *ngIf="!isLoading && subareas.length > 0" class="subareas-list">
       <div class="subarea-card" *ngFor="let subarea of subareas">
         <span>{{ subarea.name }}</span>
+        <button class="delete-button" (click)="deleteSubarea(subarea.id)">X</button>
       </div>
     </div>
   </div>

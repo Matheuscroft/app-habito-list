@@ -1,12 +1,19 @@
 <div *ngIf="area" class="area-detail">
-    <button (click)="goBack()">Voltar</button>
-    <div class="area-color" [style.background-color]="area.color">
-        <div class="area-name">
-            <h1>{{ area.name }}</h1>
-          </div>
+  <button (click)="goBack()">Voltar</button>
+  <div class="area-color" [style.background-color]="area.color">
+    <div class="area-name">
+      <h1>{{ area.name }}</h1>
     </div>
-    
-
-    <app-form-add-subarea [areaId]="area.id"></app-form-add-subarea>
-    <app-subareas-list [subareas]="area.subareas"></app-subareas-list>
   </div>
+
+  <div class="form-container">
+    <app-form-add-subarea [areaId]="area.id"></app-form-add-subarea>
+  </div>
+
+  <div class="subareas-container">
+    <app-subareas-list
+      [subareas]="subareas"
+      [isLoading]="isLoading"
+    ></app-subareas-list>
+  </div>
+</div>

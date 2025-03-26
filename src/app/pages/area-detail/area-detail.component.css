@@ -23,6 +23,14 @@
   button:hover {
     background-color: #0056b3;
   }
+
+  .area-name h1 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 
+                  -2px -2px 4px rgba(0, 0, 0, 0.8), 
+                  2px -2px 4px rgba(0, 0, 0, 0.8), 
+                  -2px 2px 4px rgba(0, 0, 0, 0.8);
+    
+  }
   
   .area-name, .area-color {
     margin-bottom: 10px;
@@ -36,6 +44,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .subareas-container {
+    margin-top: 30px;
   }
   
   h1 {

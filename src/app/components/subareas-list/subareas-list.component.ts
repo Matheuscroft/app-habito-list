@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import { SubareaService } from '../../services/subarea.service';
 
 @Component({
   selector: 'app-subareas-list',
@@ -10,12 +11,27 @@ import { Component, Input, SimpleChanges } from '@angular/core';
 export class SubareasListComponent {
 
   @Input() subareas: any[] = [];
-  isLoading = true;
+  @Input() isLoading = true;
+  @Output() subareaDeleted = new EventEmitter<string>();
+
+  constructor(private subareaService: SubareaService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['subareas']) {
-      this.isLoading = this.subareas.length === 0;
+      console.log('Subáreas recebidas:', this.subareas);
     }
+  }
+
+  deleteSubarea(subareaId: string): void {
+    this.subareaService.deleteSubarea(subareaId).subscribe({
+      next: () => {
+        console.log('Subárea deletada:', subareaId);
+        this.subareaDeleted.emit(subareaId);
+      },
+      error: (error) => {
+        console.error('Erro ao deletar subárea:', error);
+      }
+    });
   }
 
 }
