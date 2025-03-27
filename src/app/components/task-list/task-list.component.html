@@ -5,10 +5,21 @@
 </div>
 
 <ul *ngIf="!isLoading && tasks.length > 0" class="task-list">
-  <li *ngFor="let task of tasks">
-    <input type="checkbox" id="{{ task.id }}">
-    <a (click)="navigateToTaskDetail(task.id)" class="task-link">
-        <label for="{{ task.id }}">{{ task.title }}</label>
+  <li *ngFor="let task of tasks" class="task-item">
+    <div class="task-main">
+      <input type="checkbox" id="{{ task.id ?? '' }}" class="task-checkbox">
+      <a (click)="navigateToTaskDetail(task.id ?? '')" class="task-link">
+        <label for="{{ task.id ?? '' }}">
+          {{ task.title }}
+          <span class="task-badge" [style.background-color]="getAreaColor(task.areaId ?? '')">+{{ task.score }} {{ getAreaName(task.areaId ?? '') }}</span>
+        </label>
       </a>
+    </div>
+    <div class="task-actions">
+      <div *ngIf="task.subareaId" class="task-subarea">
+        {{ getSubareaName(task.subareaId) }}
+      </div>
+      <button class="delete-button" (click)="deleteTask(task.id ?? '')">X</button>
+    </div>
   </li>
 </ul>

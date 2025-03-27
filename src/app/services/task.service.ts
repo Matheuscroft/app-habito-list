@@ -36,4 +36,8 @@ export class TaskService {
   updateTask(id: string, taskData: Task): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/${id}`, taskData);
   }
+
+  deleteTask(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }

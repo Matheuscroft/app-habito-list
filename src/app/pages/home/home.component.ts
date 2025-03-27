@@ -6,6 +6,8 @@ import { Area, AreaService } from '../../services/area.service';
 import { CommonModule } from '@angular/common';
 import { FormAddAreaComponent } from '../../components/form-add-area/form-add-area.component';
 import { AreasListComponent } from '../../components/areas-list/areas-list.component';
+import { Task, TaskService } from '../../services/task.service';
+import { Subarea, SubareaService } from '../../services/subarea.service';
 
 @Component({
   selector: 'app-home',
@@ -16,8 +18,11 @@ import { AreasListComponent } from '../../components/areas-list/areas-list.compo
 export class HomeComponent {
 
   areas: Area[] = [];
+  tasks: Task[] = [];
+  subareas: Subarea[] = [];
+  isLoading = true;
   
-  constructor(private areaService: AreaService) {}
+  constructor(private areaService: AreaService, private taskService: TaskService, private subareaService: SubareaService) {}
 
   ngOnInit() {
     this.areaService.getAreas().subscribe(
@@ -28,10 +33,45 @@ export class HomeComponent {
         console.error('Erro ao carregar áreas:', error);
       }
     );
+
+    this.loadTasks();
+    this.loadSubareas();
+  }
+
+  loadTasks() {
+    this.taskService.getTasks().subscribe(
+      (data) => {
+        this.tasks = data;
+        this.isLoading = false;
+      },
+      (error) => {
+        this.isLoading = false;
+        console.error('Erro ao carregar tarefas:', error);
+      }
+    );
+  }
+
+  loadSubareas() {
+    this.subareaService.getSubareas().subscribe(
+      (data) => {
+        this.subareas = data;
+      },
+      (error) => {
+        console.error('Erro ao carregar subáreas:', error);
+      }
+    );
   }
 
   onAreaAdded(newArea: Area) {
     this.areas.push(newArea);
+  }
+
+  onTaskAdded(newTask: Task) {
+    this.tasks.push(newTask);
+  }
+
+  onTaskDeleted(taskId: string) {
+    this.tasks = this.tasks.filter(task => task.id !== taskId);
   }
 
 }

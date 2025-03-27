@@ -6,7 +6,7 @@
     </div>
   </div>
 
-  <div class="form-container">
+  <div class="form-container" *ngIf="canAddSubarea">
     <app-form-add-subarea [areaId]="area.id" (subareaAdded)="handleSubareaAdded($event)"></app-form-add-subarea>
   </div>
 
@@ -14,7 +14,9 @@
     <app-subareas-list
       [subareas]="subareas"
       [isLoading]="isLoading"
+      [canAddSubarea]="canAddSubarea"
       (subareaDeleted)="handleSubareaDeleted($event)"
     ></app-subareas-list>
   </div>
+  
 </div>

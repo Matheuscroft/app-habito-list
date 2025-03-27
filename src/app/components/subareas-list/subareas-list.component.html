@@ -1,12 +1,17 @@
 <div class="subareas-list-container">
-    <div *ngIf="isLoading" class="loading">Carregando subáreas...</div>
-    <div *ngIf="!isLoading && subareas.length === 0" class="no-subareas">
+  <div *ngIf="isLoading" class="loading">Carregando subáreas...</div>
+  <div *ngIf="!isLoading && subareas.length === 0" class="no-subareas">
+    <ng-container *ngIf="canAddSubarea; else noSubareaAllowed">
       Nenhuma subárea criada ainda.
-    </div>
-    <div *ngIf="!isLoading && subareas.length > 0" class="subareas-list">
-      <div class="subarea-card" *ngFor="let subarea of subareas">
-        <span>{{ subarea.name }}</span>
-        <button class="delete-button" (click)="deleteSubarea(subarea.id)">X</button>
-      </div>
+    </ng-container>
+  </div>
+  <div *ngIf="!isLoading && subareas.length > 0" class="subareas-list">
+    <div class="subarea-card" *ngFor="let subarea of subareas">
+      <span>{{ subarea.name }}</span>
+      <button class="delete-button" (click)="deleteSubarea(subarea.id)">X</button>
     </div>
   </div>
+  <ng-template #noSubareaAllowed>
+    Não é permitido criar subáreas para esta área padrão.
+  </ng-template>
+</div>

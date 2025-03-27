@@ -17,6 +17,10 @@ export class SubareaService {
 
   constructor(private http: HttpClient) {}
 
+  getSubareas(): Observable<Subarea[]> {
+    return this.http.get<Subarea[]>(this.apiUrl);
+  }
+
   getSubareasByAreaId(areaId: string): Observable<Subarea[]> {
     return this.http.get<Subarea[]>(`${this.apiUrl}/area/${areaId}`);
   }

@@ -17,6 +17,7 @@ export class AreaDetailComponent {
   area: Area | null = null;
   subareas: Subarea[] = [];
   isLoading = true;
+  canAddSubarea = true;
 
   constructor(private route: ActivatedRoute, private router: Router, private areaService: AreaService, private subareaService: SubareaService) {}
 
@@ -27,6 +28,7 @@ export class AreaDetailComponent {
         next: (area) => {
           this.area = area;
           console.log('Área carregada:', this.area);
+          this.canAddSubarea = this.area.name !== 'Sem Categoria';
           this.loadSubareas(areaId);
         },
         error: (error) => {

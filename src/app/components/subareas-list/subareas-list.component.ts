@@ -12,6 +12,7 @@ export class SubareasListComponent {
 
   @Input() subareas: any[] = [];
   @Input() isLoading = true;
+  @Input() canAddSubarea = true;
   @Output() subareaDeleted = new EventEmitter<string>();
 
   constructor(private subareaService: SubareaService) {}

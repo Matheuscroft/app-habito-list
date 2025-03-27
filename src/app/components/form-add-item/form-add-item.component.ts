@@ -1,7 +1,8 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TaskService } from '../../services/task.service';
 import { CommonModule } from '@angular/common';
+import { Subarea, SubareaService } from '../../services/subarea.service';
 
 @Component({
   selector: 'app-form-add-item',
@@ -18,19 +19,47 @@ export class FormAddItemComponent {
 
   @Input() 
   areas: any[] = [];
+  @Output() taskAdded = new EventEmitter<any>();
 
-  subareas = [{ id: 'uuid-da-subarea-1', name: 'Subárea 1' }, { id: 'uuid-da-subarea-2', name: 'Subárea 2' }];
+  subareas: Subarea[] = [];
 
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService, private subareaService: SubareaService) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['areas'] && this.areas.length > 0) {
       console.log('Áreas recebidas:', this.areas);
       this.areaId = this.areas[0].id;
+      if (this.areaId) {
+        this.loadSubareas(this.areaId);
+      }
+    }
+  }
+
+  loadSubareas(areaId: string): void {
+    this.subareaService.getSubareasByAreaId(areaId).subscribe({
+      next: (subareas) => {
+        this.subareas = subareas;
+        console.log('Subáreas carregadas:', this.subareas);
+      },
+      error: (error) => {
+        console.error('Erro ao carregar subáreas:', error);
+      }
+    });
+  }
+
+  onAreaChange(): void {
+    if (this.areaId) {
+      this.loadSubareas(this.areaId);
     }
   }
 
   onSubmit() {
+
+    if (this.subareaId && !this.subareas.some(subarea => subarea.id === this.subareaId)) {
+      console.error('A subárea fornecida não pertence à área fornecida.');
+      return;
+    }
+
     const newTask = {
       title: this.title,
       score: this.score,
@@ -42,6 +71,8 @@ export class FormAddItemComponent {
     this.taskService.createTask(newTask).subscribe({
       next: (response) => {
         console.log('Tarefa criada com sucesso:', response);
+        this.taskAdded.emit(response);
+        this.resetForm();
       },
       error: (error) => {
         console.error('Erro ao criar tarefa:', error);
@@ -50,5 +81,15 @@ export class FormAddItemComponent {
 
     console.log('Tarefa criada:', newTask);
 
+  }
+
+  resetForm() {
+    this.title = '';
+    this.score = 1;
+    this.areaId = this.areas.length > 0 ? this.areas[0].id : null;
+    this.subareaId = null;
+    if (this.areaId) {
+      this.loadSubareas(this.areaId);
+    }
   }
 }

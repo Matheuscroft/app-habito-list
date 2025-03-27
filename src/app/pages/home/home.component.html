@@ -19,7 +19,7 @@
     <div class="task-list-title">
       <h2>Minhas Tarefas</h2>
     </div>
-    <app-form-add-item [areas]="areas"></app-form-add-item>
-    <app-task-list></app-task-list>
+    <app-form-add-item [areas]="areas" (taskAdded)="onTaskAdded($event)"></app-form-add-item>
+    <app-task-list [tasks]="tasks" [isLoading]="isLoading" [areas]="areas" [subareas]="subareas" (taskDeleted)="onTaskDeleted($event)"></app-task-list>
   </div>
 </div>

@@ -11,7 +11,7 @@
   
   <div class="form-add-item__areaName">
     <label for="areaId">Área</label>
-    <select id="areaId" [(ngModel)]="areaId" name="areaId" required>
+    <select id="areaId" [(ngModel)]="areaId" name="areaId" required (change)="onAreaChange()">
       <option *ngFor="let area of areas" [value]="area.id">{{ area.name }}</option>
     </select>
   </div>
