@@ -33,4 +33,8 @@ export class SubareaService {
     return this.http.post<Subarea>(this.apiUrl, subarea);
   }
 
+  getSubareaById(subareaId: string): Observable<Subarea> {
+    return this.http.get<Subarea>(`${this.apiUrl}/${subareaId}`);
+  }
+
 }

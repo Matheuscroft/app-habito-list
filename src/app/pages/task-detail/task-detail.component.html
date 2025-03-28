@@ -4,32 +4,58 @@
   </div>
   <div class="task-header">
     <div class="task-title">
-      <h1 (click)="toggleEdit('title')">
-        <span *ngIf="!isEditing['title']">{{ task.title }}</span>
-        <input *ngIf="isEditing['title']" [(ngModel)]="task.title" (blur)="updateTask('title', task.title)" (keyup.enter)="updateTask('title', task.title)">
+      <h1>
+        <span *ngIf="!isEditing['title']" (click)="toggleEdit('title')">{{ task.title }}</span>
+        <input
+          *ngIf="isEditing['title']"
+          #titleInput
+          [value]="task.title"
+          (blur)="onInputBlur($event, 'title')"
+          (keyup.enter)="onInputBlur($event, 'title')"
+        />
       </h1>
     </div>
     <div class="task-score">
-      <span> + {{ task.score }} XP</span>
+      <span *ngIf="!isEditing['score']" (click)="toggleEdit('score')">+ {{ task.score }} XP</span>
+      <input
+        *ngIf="isEditing['score']"
+        type="number"
+        #scoreInput
+        [value]="task.score"
+        (blur)="onInputBlur($event, 'score')"
+        (keyup.enter)="onInputBlur($event, 'score')"
+      />
     </div>
   </div>
   <div class="task-area">
     <div class="area-info">
       <div class="area-name">
         <p>
-          Área: 
-          <span *ngIf="!isEditing['areaId']">{{ area?.name }}</span>
-          <select *ngIf="isEditing['areaId']" [(ngModel)]="task.areaId" (change)="updateTask('areaId', task.areaId)">
-            <option *ngFor="let area of areas" [value]="area">{{ area }}</option>
+          Área:
+          <span *ngIf="!isEditing['areaId']" (click)="toggleEdit('areaId')">{{ area?.name }}</span>
+          <select
+            *ngIf="isEditing['areaId']"
+            #areaSelect
+            (change)="onSelectChange($event, 'areaId')"
+            (blur)="onBlur('areaId')"
+          >
+            <option *ngFor="let area of areas" [value]="area.id" [selected]="area.id === task.areaId">{{ area.name }}</option>
           </select>
         </p>
       </div>
-      <div class="subarea-name" *ngIf="task.subareaId">
+      <div class="subarea-name" *ngIf="task.areaId">
         <p>
-          Subárea: 
-          <span *ngIf="!isEditing['subareaId']">{{ task.subareaId }}</span>
-          <select *ngIf="isEditing['subareaId']" [(ngModel)]="task.subareaId" (change)="updateTask('subareaId', task.subareaId)">
-            <option *ngFor="let subarea of subareas" [value]="subarea">{{ subarea }}</option>
+          Subárea:
+          <span *ngIf="!isEditing['subareaId']" (click)="toggleEdit('subareaId')">
+            {{ subarea?.name || 'Nenhuma subárea selecionada' }}
+          </span>
+          <select
+            *ngIf="isEditing['subareaId']"
+            #subareaSelect
+            (change)="onSelectChange($event, 'subareaId')"
+            (blur)="onBlur('subareaId')"
+          >
+            <option *ngFor="let subarea of filteredSubareas" [value]="subarea.id" [selected]="subarea.id === task.subareaId">{{ subarea.name }}</option>
           </select>
         </p>
       </div>
