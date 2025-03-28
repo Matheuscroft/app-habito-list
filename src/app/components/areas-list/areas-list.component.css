@@ -25,6 +25,13 @@
     cursor: pointer;
   }
 
+  .area-card span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calc(100% - 30px);
+  }
+
   .delete-button {
     position: absolute;
     top: 8px;
