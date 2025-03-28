@@ -24,12 +24,40 @@
     background-color: #0056b3;
   }
 
-  .area-name h1 {
+  .area-name span {
+    font-size: 2.5rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 
                   -2px -2px 4px rgba(0, 0, 0, 0.8), 
                   2px -2px 4px rgba(0, 0, 0, 0.8), 
                   -2px 2px 4px rgba(0, 0, 0, 0.8);
     
+  }
+
+  .area-color-picker {
+    margin-left: 20px;
+  }
+
+  .color-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 3px solid #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .color-circle:hover {
+    transform: scale(1.1);
+    transition: transform 0.2s ease-in-out;
+  }
+
+  input[type="color"] {
+    border: none;
+    background: none;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: solid 3px #ffffff;
   }
   
   .area-name, .area-color {

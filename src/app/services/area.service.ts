@@ -15,7 +15,7 @@ export interface Area {
 })
 export class AreaService {
 
-  private apiUrl = 'http://localhost:8080/areas';
+  private apiUrl = 'https://api-abito-arcano-prd.up.railway.app/areas';
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -42,6 +42,18 @@ export class AreaService {
 
   addArea(area: Area): Observable<Area> {
     return this.http.post<Area>(this.apiUrl, area);
+  }
+
+  deleteArea(areaId: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${areaId}`);
+  }
+
+  updateArea(areaId: string, updatedArea: Area): Observable<Area> {
+    return this.http.put<Area>(`${this.apiUrl}/${areaId}`, updatedArea, this.httpOptions)
+      .pipe(
+        map(response => response),
+        catchError(this.handleError)
+      );
   }
 
   private handleError(error: any) {

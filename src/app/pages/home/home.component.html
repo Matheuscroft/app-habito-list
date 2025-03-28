@@ -10,7 +10,7 @@
 
     <app-form-add-area [areas]="areas" (areaAdded)="onAreaAdded($event)"></app-form-add-area>
     
-    <app-areas-list [areas]="areas"></app-areas-list>
+    <app-areas-list [areas]="areas" (areaDeleted)="onAreaDeleted($event)"></app-areas-list>
     
   </div>
 

@@ -18,6 +18,7 @@ export class AreaDetailComponent {
   subareas: Subarea[] = [];
   isLoading = true;
   canAddSubarea = true;
+  isEditing: { [key: string]: boolean } = {}
 
   constructor(private route: ActivatedRoute, private router: Router, private areaService: AreaService, private subareaService: SubareaService) {}
 
@@ -51,6 +52,58 @@ export class AreaDetailComponent {
         this.isLoading = false;
       }
     });
+  }
+
+  toggleEditName(): void {
+    this.isEditing['name'] = true;
+    setTimeout(() => {
+      const input = document.querySelector('#nameInput') as HTMLInputElement;
+      input?.focus();
+    });
+  }
+
+  onNameBlur(event: Event): void {
+    const inputValue = (event.target as HTMLInputElement).value.trim();
+    if (this.area && inputValue && this.area.name !== inputValue) {
+      this.area.name = inputValue;
+  
+      this.areaService.updateArea(this.area.id, this.area).subscribe({
+        next: (updated) => {
+          console.log(`Nome da área atualizado com sucesso:`, updated);
+          this.area = updated;
+        },
+        error: (err) => {
+          console.error('Erro ao atualizar o nome da área:', err);
+        }
+      });
+    }
+    this.isEditing['name'] = false;
+  }
+
+  toggleEditColor(): void {
+    this.isEditing['color'] = true;
+    setTimeout(() => {
+      const input = document.querySelector('#colorInput') as HTMLInputElement;
+      input?.focus();
+    });
+  }
+
+  onColorBlur(event: Event): void {
+    const inputValue = (event.target as HTMLInputElement).value.trim();
+    if (this.area && inputValue && this.area.color !== inputValue) {
+      this.area.color = inputValue;
+  
+      this.areaService.updateArea(this.area.id, this.area).subscribe({
+        next: (updated) => {
+          console.log(`Cor da área atualizada com sucesso:`, updated);
+          this.area = updated;
+        },
+        error: (err) => {
+          console.error('Erro ao atualizar a cor da área:', err);
+        }
+      });
+    }
+    this.isEditing['color'] = false;
   }
 
   handleSubareaDeleted(subareaId: string): void {

@@ -2,12 +2,43 @@
   <button (click)="goBack()">Voltar</button>
   <div class="area-color" [style.background-color]="area.color">
     <div class="area-name">
-      <h1>{{ area.name }}</h1>
+      <span *ngIf="!isEditing['name']" [style.cursor]="area.name === 'Sem Categoria' ? 'default' : 'pointer'" (click)="area.name !== 'Sem Categoria' && toggleEditName()">{{
+        area.name
+      }}</span>
+      <input
+        *ngIf="isEditing['name']"
+        type="text"
+        [value]="area.name"
+        id="nameInput"
+        (blur)="onNameBlur($event)"
+        (keyup.enter)="onNameBlur($event)"
+      />
+    </div>
+
+    <div class="area-color-picker">
+      <div
+        *ngIf="!isEditing['color']"
+        class="color-circle"
+        [style.background-color]="area.color"
+        [style.cursor]="area.name === 'Sem Categoria' ? 'default' : 'pointer'"
+        (click)="area.name !== 'Sem Categoria' && toggleEditColor()"
+      ></div>
+      <input
+        *ngIf="isEditing['color']"
+        type="color"
+        [value]="area.color"
+        id="colorInput"
+        (blur)="onColorBlur($event)"
+        (change)="onColorBlur($event)"
+      />
     </div>
   </div>
 
   <div class="form-container" *ngIf="canAddSubarea">
-    <app-form-add-subarea [areaId]="area.id" (subareaAdded)="handleSubareaAdded($event)"></app-form-add-subarea>
+    <app-form-add-subarea
+      [areaId]="area.id"
+      (subareaAdded)="handleSubareaAdded($event)"
+    ></app-form-add-subarea>
   </div>
 
   <div class="subareas-container">
@@ -18,5 +49,4 @@
       (subareaDeleted)="handleSubareaDeleted($event)"
     ></app-subareas-list>
   </div>
-  
 </div>

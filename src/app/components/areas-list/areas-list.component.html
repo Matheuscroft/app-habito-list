@@ -1,7 +1,19 @@
 <div class="areas-list-container">
   <div *ngIf="isLoading" class="loading">Carregando áreas...</div>
   <div *ngIf="!isLoading" class="areas-list">
-    <div class="area-card" *ngFor="let area of areas" [style.background-color]="area.color" (click)="navigateToAreaDetail(area.id)">
+    <div
+      class="area-card"
+      *ngFor="let area of areas"
+      [style.background-color]="area.color"
+      (click)="navigateToAreaDetail(area.id)"
+    >
+      <button
+        *ngIf="area.name !== 'Sem Categoria'"
+        class="delete-button"
+        (click)="onDeleteArea(area.id, $event)"
+      >
+        &times;
+      </button>
       <span>{{ area.name }}</span>
     </div>
   </div>

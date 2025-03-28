@@ -62,8 +62,13 @@ export class HomeComponent {
     );
   }
 
-  onAreaAdded(newArea: Area) {
+  onAreaAdded(newArea: Area): void {
     this.areas.push(newArea);
+  }
+
+  onAreaDeleted(areaId: string): void {
+    console.log(`Área com ID ${areaId} foi excluída.`);
+    this.areas = this.areas.filter(area => area.id !== areaId);
   }
 
   onTaskAdded(newTask: Task) {
