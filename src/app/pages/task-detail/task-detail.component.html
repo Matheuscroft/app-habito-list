@@ -5,7 +5,9 @@
   <div class="task-header">
     <div class="task-title">
       <h1>
-        <span *ngIf="!isEditing['title']" (click)="toggleEdit('title')">{{ task.title }}</span>
+        <span *ngIf="!isEditing['title']" (click)="toggleEdit('title')">{{
+          task.title
+        }}</span>
         <input
           *ngIf="isEditing['title']"
           #titleInput
@@ -15,8 +17,10 @@
         />
       </h1>
     </div>
-    <div class="task-score">
-      <span *ngIf="!isEditing['score']" (click)="toggleEdit('score')">+ {{ task.score }} XP</span>
+    <div class="task-score" [style.background-color]="getAreaColor()">
+      <span *ngIf="!isEditing['score']" (click)="toggleEdit('score')"
+        >+ {{ task.score }} XP</span
+      >
       <input
         *ngIf="isEditing['score']"
         type="number"
@@ -29,37 +33,61 @@
   </div>
   <div class="task-area">
     <div class="area-info">
-      <div class="area-name">
-        <p>
-          Área:
-          <span *ngIf="!isEditing['areaId']" (click)="toggleEdit('areaId')">{{ area?.name }}</span>
+      <div class="area-container">
+        <p class="area-label">Área:</p>
+        <div class="area-card" (click)="toggleEdit('areaId')">
+          <span *ngIf="!isEditing['areaId']">{{
+            area?.name
+          }}</span>
           <select
             *ngIf="isEditing['areaId']"
             #areaSelect
+            (click)="$event.stopPropagation()"
             (change)="onSelectChange($event, 'areaId')"
             (blur)="onBlur('areaId')"
           >
-            <option *ngFor="let area of areas" [value]="area.id" [selected]="area.id === task.areaId">{{ area.name }}</option>
+            <option
+              *ngFor="let area of areas"
+              [value]="area.id"
+              [selected]="area.id === task.areaId"
+            >
+              {{ area.name }}
+            </option>
           </select>
-        </p>
+          <div
+            class="area-circle"
+            [style.background-color]="getAreaColor()"
+          ></div>
+        </div>
       </div>
-      <div class="subarea-name" *ngIf="task.areaId">
-        <p>
+
+      <div class="subarea-container">
+        <p class="subarea-label" *ngIf="area?.name !== 'Sem Categoria'">
           Subárea:
-          <span *ngIf="!isEditing['subareaId']" (click)="toggleEdit('subareaId')">
-            {{ subarea?.name || 'Nenhuma subárea selecionada' }}
+        </p>
+        <div class="subarea-card" *ngIf="area?.name !== 'Sem Categoria'">
+          <span
+            *ngIf="!isEditing['subareaId']"
+            (click)="toggleEdit('subareaId')"
+          >
+            {{ subarea?.name || "Nenhuma subárea selecionada" }}
           </span>
           <select
             *ngIf="isEditing['subareaId']"
             #subareaSelect
             (change)="onSelectChange($event, 'subareaId')"
-            (blur)="onBlur('subareaId')"
+            (blur)="onSelectChange($event, 'subareaId')"
           >
-            <option *ngFor="let subarea of filteredSubareas" [value]="subarea.id" [selected]="subarea.id === task.subareaId">{{ subarea.name }}</option>
+            <option
+              *ngFor="let subarea of filteredSubareas"
+              [value]="subarea.id"
+              [selected]="subarea.id === task.subareaId"
+            >
+              {{ subarea.name }}
+            </option>
           </select>
-        </p>
+        </div>
       </div>
     </div>
-    <div class="area-circle" [style.background-color]="getAreaColor()"></div>
   </div>
 </div>
