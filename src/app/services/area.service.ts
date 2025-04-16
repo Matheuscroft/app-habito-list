@@ -15,7 +15,7 @@ export interface Area {
 })
 export class AreaService {
 
-  private apiUrl = 'https://api-abito-arcano-prd.up.railway.app/areas';
+  private apiUrl = 'https://api-abito-arcano.onrender.com/areas';
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'

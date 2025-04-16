@@ -13,7 +13,7 @@ export interface Subarea {
 })
 export class SubareaService {
 
-  private apiUrl = 'https://api-abito-arcano-prd.up.railway.app/subareas';
+  private apiUrl = 'https://api-abito-arcano.onrender.com/subareas';
 
   constructor(private http: HttpClient) {}
 

@@ -17,7 +17,7 @@ export interface Task {
 export class TaskService {
 
   private http = inject(HttpClient);
-  private apiUrl = 'https://api-abito-arcano-prd.up.railway.app/tarefas';
+  private apiUrl = 'https://api-abito-arcano.onrender.com/tarefas';
 
   constructor() { }
 
